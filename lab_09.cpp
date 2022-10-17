@@ -111,25 +111,83 @@ void conversion(string s)
                 q1.Enqueue(s[i]);
             else
             {
-                while(value(q1.rear->data) >= value(s[i]) || q1.front != NULL)
+                if(value(q1.rear->data) >= value(s[i]) || q1.front != NULL)
                 {
                     p = p+q1.rear->data;
                     q1 = pop_queue(q1);
+                    q1.Enqueue(s[i]);
                 }
-                q1.Enqueue(s[i]);
             }
         }
         else
             p = p+s[i];
         i++;
     }
-    cout << ": " << q1.front->data << endl;
     while(q1.front != NULL)
     {
         p = p+q1.rear->data;
         q1 = pop_queue(q1);
     }
     cout << "Postfix string is : " << p << endl;
+}
+int value_char(char k)
+{
+    if((k>=65 && k<=90) || (k>=97 && k<=122))
+        return 1;
+    else if(k == '^' || k == '/' || k == '*' || k == '+' || k == '-')
+        return 2;
+    else if(k == '(')
+        return 3;
+    else if(k == ')')
+        return 4;
+    else
+        return 5;
+}
+string checking(string s)
+{
+    int br = 0,i;
+    try
+    {
+        if(value_char(s[0]) == 5 || value_char(s[0]) == 2 || s.size() == 1)
+        {
+            throw 0;
+        }
+        else
+        {
+            for(i=0;i<s.size()-1;i++)
+            {
+                int t = value_char(s[i]);
+                if(value_char(s[i]) == 5)
+                    throw 0;
+                if(value_char(s[i]) == value_char(s[i+1]))
+                {
+                    if(s[i]!='(' || s[i]!=')')
+                        throw 0;
+                }
+                if(br == -1)
+                    throw 0;
+                if(s[i] == '(')
+                    br++;
+                if(s[i] == ')')
+                    br--;
+                if((s[i] == '(' && value_char(s[i+1]) != 1 && value_char(s[i+1]) != 3) || (s[i] == ')' && value_char(s[i-1]) != 1  && value_char(s[i-1]) != 4))
+                    throw 0;
+                if(i>0 && s[i] == '(' && value_char(s[i-1]) == 1)
+                    throw 0;
+            }
+            if(s[i] == ')')
+                br--;
+            if(br != 0)
+                throw 0;
+        } 
+    }
+    catch(int ex)
+    {
+        if(ex == 0)
+            cout << "Invalid Expression!" << endl;
+            s = "\0";
+    }
+    return s;
 }
 int main()
 {
@@ -147,6 +205,7 @@ int main()
         {
             cout << "Enter the Infix string : ";
             cin >> infix;
+            infix = checking(infix);
         }
         else if(choice == 2)
         {
