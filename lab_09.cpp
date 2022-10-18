@@ -175,6 +175,8 @@ string checking(string s)
                 if(i>0 && s[i] == '(' && value_char(s[i-1]) == 1)
                     throw 0;
             }
+            if(s[i] == ')' && value_char(s[i-1]) != 1  && value_char(s[i-1]) != 4)
+                throw 0;
             if(s[i] == ')')
                 br--;
             if(br != 0)
