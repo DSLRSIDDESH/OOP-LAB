@@ -1,3 +1,4 @@
+// without considering brackets and power operator
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -134,24 +135,18 @@ int value_char(char k)
 {
     if((k>=65 && k<=90) || (k>=97 && k<=122))
         return 1;
-    else if(k == '^' || k == '/' || k == '*' || k == '+' || k == '-')
+    else if(k == '/' || k == '*' || k == '+' || k == '-')
         return 2;
-    else if(k == '(')
-        return 3;
-    else if(k == ')')
-        return 4;
     else
         return 5;
 }
 string checking(string s)
 {
-    int br = 0,i;
+    int i;
     try
     {
-        if(value_char(s[0]) == 5 || value_char(s[0]) == 2 || s.size() == 1)
-        {
+        if(value_char(s[0]) != 1 || s.size() == 1)
             throw 0;
-        }
         else
         {
             for(i=0;i<s.size()-1;i++)
@@ -160,26 +155,13 @@ string checking(string s)
                 if(value_char(s[i]) == 5)
                     throw 0;
                 if(value_char(s[i]) == value_char(s[i+1]))
-                {
-                    if(s[i]!='(' || s[i]!=')')
-                        throw 0;
-                }
-                if(br == -1)
                     throw 0;
                 if(s[i] == '(')
-                    br++;
-                if(s[i] == ')')
-                    br--;
-                if((s[i] == '(' && value_char(s[i+1]) != 1 && value_char(s[i+1]) != 3) || (s[i] == ')' && value_char(s[i-1]) != 1  && value_char(s[i-1]) != 4))
                     throw 0;
-                if(i>0 && s[i] == '(' && value_char(s[i-1]) == 1)
+                if(s[i] == ')')
                     throw 0;
             }
-            if(s[i] == ')' && value_char(s[i-1]) != 1  && value_char(s[i-1]) != 4)
-                throw 0;
-            if(s[i] == ')')
-                br--;
-            if(br != 0)
+            if(s[s.size()-1] == ')' || s[s.size()-1] == '(' || value_char(s[s.size()-1]) != 1)
                 throw 0;
         } 
     }
