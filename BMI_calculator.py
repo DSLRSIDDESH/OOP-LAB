@@ -1,10 +1,30 @@
+from curses.ascii import isalnum
 from tkinter import *
 def calculate():
-    h = float(height_e.get())
-    w = float(weight_e.get())
-    bmi = w / (h * h)
+    h = height_e.get()
+    w = weight_e.get()
+    h_,w_ = "",""
+    for i in range(len(h)):
+        if h[i] != '.':
+            h_ += h[i]
+    for i in range(len(w)):
+        if w[i] != ".":
+            w_ += w[i]
+    if len(height_e.get()) == 0 or len(weight_e.get()) == 0:
+        bmi = "Please Input!"
+    elif not h_.isnumeric():
+        bmi = "Invalid Input!"
+    elif not w_.isnumeric():
+        bmi = "Invalid Input!"
+    else:
+        h = float(height_e.get())
+        w = float(weight_e.get())
+        if h > 0.0 and w > 0.0:
+            bmi = round(w / (h * h),2)
+        else:
+            bmi = "Invalid Input!"
     bmi_e.delete(0,END)
-    bmi_e.insert(0,round(bmi,2))
+    bmi_e.insert(0,bmi)
 
 top = Tk()
 top.configure(background="light green")
