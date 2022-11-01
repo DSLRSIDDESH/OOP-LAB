@@ -29,19 +29,19 @@ def calculate():
 top = Tk()
 top.configure(background="lightgreen")
 top.title("BMI Calculator")
-height_l = Label(top,text = "Height (in Meter)",background="light green")
+height_l = Label(top,text = "Height (in Meter)",background="lightgreen")
 height_l.grid(row=0,column=0)
 
 height_e = Entry(top)
 height_e.grid(row=0,column=1)
 
-weight_l = Label(top,text = "Weight (in Kg)",background="light green")
+weight_l = Label(top,text = "Weight (in Kg)",background="lightgreen")
 weight_l.grid(row=1,column=0)
 
 weight_e = Entry(top)
 weight_e.grid(row=1,column=1)
 
-bmi_l = Label(top,text = "Your BMI",background="light green")
+bmi_l = Label(top,text = "Your BMI",background="lightgreen")
 bmi_l.grid(row=2,column=0)
 
 bmi_e = Entry(top)

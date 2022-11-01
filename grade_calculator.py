@@ -137,7 +137,7 @@ def calculate_cred():
     total_credit_2.configure(text=l1[0]*4+l1[1]*4+l1[2]*3+l1[3]*4)
     sgpa_2.configure(text=round((l1[0]*4+l1[1]*4+l1[2]*3+l1[3]*4)/15,2))
 
-submit_button = Button(top,text="submit",command = calculate_cred,background="#5F9DF7",highlightbackground = "#CDFCF6")
+submit_button = Button(top,text="submit",command = calculate_cred,background="#5F9DF7",highlightbackground = "#CDFCF6",relief="groove")
 submit_button.grid(row=8,column=1)
 
 top.mainloop()
