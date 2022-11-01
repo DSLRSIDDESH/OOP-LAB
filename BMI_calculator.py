@@ -27,7 +27,7 @@ def calculate():
     bmi_e.insert(0,bmi)
 
 top = Tk()
-top.configure(background="light green")
+top.configure(background="lightgreen")
 top.title("BMI Calculator")
 height_l = Label(top,text = "Height (in Meter)",background="light green")
 height_l.grid(row=0,column=0)
